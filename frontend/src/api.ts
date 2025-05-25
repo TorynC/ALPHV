@@ -1,7 +1,9 @@
 import axios from "axios"
-//VITE_API_URL="http://127.0.0.1:8000/api"
+
+const apiURL = "/choreo-apis/alphv-assignment/backend/v1"
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL
+    baseURL: import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : apiURL,
 })
 
 export default api 
