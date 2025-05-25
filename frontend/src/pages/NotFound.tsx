@@ -1,3 +1,5 @@
+import "../styles/index.css"
+
 function NotFound() {
   return (
     <div style={{textAlign: 'center'}}>

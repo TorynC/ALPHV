@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import api from "../api";
 import "../styles/form.css";
 import logo from "../assets/logo.png"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/index.css"
 
 const colorOptions = ['RED', 'GREEN', 'BLUE', 'YELLOW'];
 const shapeOptions = ['CIRCLE', 'TRIANGLE', 'SQUARE']; // Must match backend exactly
@@ -22,20 +25,37 @@ function Form({ route, method }: FormProps) {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
-        
+
         try {
-            const response = await api.post(route, {
+            if (method === "add") {
+                const response = await api.post(route, {
                 name,
                 shape,
                 color
-            }, {
-                headers: {
-                    'Content-Type': 'application/json' // Critical header
-                }
-            });
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json' 
+                    }
+                });
+                console.log('Success:', response.data);
+                toast.success("Item Added");
+                setTimeout(() => navigate("/items/"), 1500);
+            } else {
+                const response = await api.put(route, {
+                    name,
+                    shape,
+                    color
+                    }, { 
+                    headers: {
+                        'Content-Type': 'application/json' 
+                    }
+                    });
+                    console.log("item successfully edited");
+                    toast.success("Item Edited");
+                    console.log(response.data);
+                    setTimeout(() => navigate("/items/"), 1500);
+            }
             
-            console.log('Success:', response.data);
-            navigate("/items");
         } catch (error: any) {
             if (error.response) {
                 // Show detailed error from Django
@@ -51,11 +71,10 @@ function Form({ route, method }: FormProps) {
     };
 
     return (
-        
         <form onSubmit={handleSubmit} className="form-container">
             <img src={logo} width={250} height={100} alt="ALPHV logo" />
             
-            <h1>Add Item</h1>
+            <h1>{method === "add" ? "Add Item" : "Edit Item"}</h1>
             <input
                 className="form-input"
                 type="text"

@@ -1,10 +1,7 @@
-import react from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate,
-  createBrowserRouter,
 } from "react-router-dom";
 import Admin from "./pages/admin";
 import EditItems from "./pages/EditItem";
@@ -16,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Admin></Admin>}></Route>
-        <Route path="/edititems" element={<EditItems></EditItems>}></Route>
+        <Route path="/edititems/:id" element={<EditItems></EditItems>}></Route>
         <Route path="/items" element={<Items></Items>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
