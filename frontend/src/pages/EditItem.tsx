@@ -26,6 +26,8 @@
                 const response = await api.get(`/items/${id}`);
                 setItem(response.data);
                 console.log(response.data);
+                console.log(loading)
+                console.log(item)
         
             } catch (error: any) {
                 console.error(error);

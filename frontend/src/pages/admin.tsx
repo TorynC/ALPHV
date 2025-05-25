@@ -1,7 +1,7 @@
 import Form from "../components/form"
 import { useNavigate } from "react-router-dom"
 import "../styles/admin.css"
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "../styles/index.css"
 
 
