@@ -1,13 +1,16 @@
 from django.db import models
 
 # Create your models here.
+# Defining a model representing an item with a name, shape, color, timestamps
 class Item(models.Model):
+    # Predefined choices for shape 
     SHAPE_CHOICES = [
         ('CIRCLE', 'Circle'),
         ('SQUARE', 'Square'),
         ('TRIANGLE', 'Triangle'),
     ]
 
+    # Predefined choices for color
     COLOR_CHOICES = [
         ('GREEN', 'Green'),
         ('BLUE', 'Blue'),

@@ -1,5 +1,6 @@
 import "../styles/index.css"
 
+// Error page that will display when a page is not found 
 function NotFound() {
   return (
     <div style={{textAlign: 'center'}}>

@@ -16,7 +16,8 @@ import yellowTriangle from "../assets/yellow-triangle.png";
 import greenTriangle from "../assets/green-triangle.png";
 import "../styles/index.css"
 
-//{"id": 3,"name": "Toryn","color": "GREEN","shape": "TRIANGLE","timestamp": "2025-05-21T15:30:14.379350+08:00"}
+// eg. {"id": 3,"name": "Toryn","color": "GREEN","shape": "TRIANGLE","timestamp": "2025-05-21T15:30:14.379350+08:00"}
+// Type definition for an item fetched from API
 type ItemType = {
   id: number;
   name: string;
@@ -24,11 +25,11 @@ type ItemType = {
   color: string;
   timestamp: string;
 };
-
+// Table used to display all information 
 function table() {
   const [items, setItems] = useState<ItemType[]>([]);
   const [loading, setLoading] = useState(false);
-
+  // define columns for Datatable component
   const columns = [
     { name: "ID", selector: (row: ItemType) => row.id, sortable: true },
     { name: "Name", selector: (row: ItemType) => row.name },
@@ -39,6 +40,7 @@ function table() {
       selector: (row: ItemType) => new Date(row.timestamp).toLocaleString(),
     },
     {
+      // Display image corresponding to each item's shape and color 
       name: "Image",
       cell: (row: ItemType) => {
         const key = `${row.shape}-${row.color}`.toUpperCase();
@@ -52,11 +54,11 @@ function table() {
       },
     },
   ];
-
+  // useEffect hook to fetch data once component mounts
   useEffect(() => {
     fetchData();
   }, []);
-
+  // map keys for shape-color combinatino to imported image paths
   const getImage: Record<string, string> = {
     "CIRCLE-RED": redCircle,
     "CIRCLE-BLUE": blueCircle,
@@ -71,7 +73,7 @@ function table() {
     "TRIANGLE-YELLOW": yellowTriangle,
     "TRIANGLE-GREEN": greenTriangle,
   };
-
+  // async function to fetch item data from API 
   async function fetchData() {
     try {
       setLoading(true);
@@ -80,6 +82,7 @@ function table() {
 
       console.log("Items received:", response.data);
     } catch (error: any) {
+      // Handle backend or network errors
       if (error.response) {
         console.error("Backend error:", error.response.data);
         alert(`Error: ${JSON.stringify(error.response.data)}`);
@@ -93,6 +96,7 @@ function table() {
   }
 
   return (
+    // Render DataTable component with columns and data
     <div className="table">
       <DataTable
         title="Items"
