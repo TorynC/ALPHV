@@ -17,6 +17,7 @@ class Item(models.Model):
         ('YELLOW', 'Yellow'),
         ('RED', 'Red')
     ]
+    # id is primary key 
     name = models.CharField(max_length=100, blank=False, null=False)
     color = models.CharField(max_length=20, choices=COLOR_CHOICES)
     shape = models.CharField(max_length=20, choices=SHAPE_CHOICES)
